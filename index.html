@@ -5,6 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pesonagens do Rick & Morty</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body></body>
+  <body id="app-root">
+    <header id="app-header">
+      <div class="logo-wrapper">
+        <h1>Personagens da serie animada Rick & Morty</h1>
+      </div>
+    </header>
+
+    <main id="app-main">
+      <div class="filter-wrapper"></div>
+
+      <div class="cards-wrapper">
+        <div class="card">
+          <div class="image-wrapper">
+            <img
+              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+              alt="image"
+            />
+          </div>
+          <div class="info-wrapper">
+            <h2>Rick Sanchez</h2>
+            <p>Human - Male (icon)</p>
+            <div class="status-wrapper">
+              (icone)
+              <p>Alive</p>
+            </div>
+            <p>(icone) Earth</p>
+            <p>Displayed X times</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="app-footer">
+      <p>Desenvolvido por Robert Santos</p>
+    </footer>
+    <script src="./js/script.js"></script>
+  </body>
 </html>
