@@ -83,9 +83,21 @@ async function getEpisodes() {
     .catch(() => alert("Ocorreu um erro no sistema"));
 }
 
-const renderCharacter = (itens) => {
+const render = (itens) => {
   cardsWrapper.innerHTML = "";
 
+  !itens || !itens.length ? renderEmptySearch() : renderCharacter(itens);
+};
+
+const renderEmptySearch = () => {
+  cardsWrapper.innerHTML = `
+    <div class='warning-alert-wrapper'>
+      <span class="material-icons">warning</span>
+      <p>Nenhum resultado encontrado, limpe os parametros de filtro e tente novamente.</p>
+    </div>`;
+};
+
+const renderCharacter = (itens) => {
   itens.forEach((char) => {
     const element = `
       <div class="card">
@@ -135,7 +147,7 @@ nameCharacterFilter.addEventListener("input", (e) => {
 
   !nameCharacterFilter.value.length
     ? renderCharacter(characters)
-    : renderCharacter(
+    : render(
         characters.filter((char) =>
           char.name.includes(nameCharacterFilter.value)
         )
@@ -151,7 +163,5 @@ locationSelectFilter.addEventListener("change", (e) => {
 
   !locationSelectFilter.value
     ? renderCharacter(characters)
-    : renderCharacter(
-        characters.filter((char) => char.location === location.name)
-      );
+    : render(characters.filter((char) => char.location === location.name));
 });
