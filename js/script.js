@@ -12,6 +12,65 @@ getCharacters();
 getLocations();
 getEpisodes();
 
+const render = (itens) => {
+  cardsWrapper.innerHTML = "";
+
+  !itens || !itens.length ? renderEmptySearch() : renderCharacter(itens);
+};
+
+const renderEmptySearch = () => {
+  cardsWrapper.innerHTML = `
+    <div class='warning-alert-wrapper'>
+      <span class="material-icons">warning</span>
+      <p>Nenhum resultado encontrado, limpe os parametros de filtro e tente novamente.</p>
+    </div>`;
+};
+
+const renderCharacter = (itens) => {
+  itens.forEach((char) => {
+    const element = `
+      <div class="card">
+        <div class="image-wrapper">
+          <img
+            src="${char.image}"
+            alt="image"
+          />
+        </div>
+        <div class="info-wrapper">
+          <h2>${char.name}</h2>
+          <div class="gender-wrapper">
+            <span class="material-icons ${char.gender.toLowerCase()}">${
+      char.gender === "Male" ? "male" : "female"
+    }</span>
+            <p>${char.species}</p>
+          </div>
+          <div class="status-wrapper">
+            <span class="material-icons ${char.status.toLowerCase()}">circle</span>
+            <p>${char.status}</p>
+          </div>
+          <div class="location-wrapper">
+            <span class="material-icons">public</span>
+            <p>${char.location}</p>
+          </div>
+          <p>Displayed ${char.episode.length} times</p>
+        </div>
+      </div>
+    `;
+
+    cardsWrapper.innerHTML += element;
+  });
+};
+
+const renderOptionsFilterLocation = (itens) => {
+  itens.forEach((location) => {
+    const option = `
+      <option value="${location.id}">${location.name}</option>
+    `;
+
+    selectLocationsSelect.innerHTML += option;
+  });
+};
+
 async function getCharacters() {
   await fetch(baseUrl.replace("resource", "character"))
     .then((res) => res.json())
@@ -82,65 +141,6 @@ async function getEpisodes() {
     )
     .catch(() => alert("Ocorreu um erro no sistema"));
 }
-
-const render = (itens) => {
-  cardsWrapper.innerHTML = "";
-
-  !itens || !itens.length ? renderEmptySearch() : renderCharacter(itens);
-};
-
-const renderEmptySearch = () => {
-  cardsWrapper.innerHTML = `
-    <div class='warning-alert-wrapper'>
-      <span class="material-icons">warning</span>
-      <p>Nenhum resultado encontrado, limpe os parametros de filtro e tente novamente.</p>
-    </div>`;
-};
-
-const renderCharacter = (itens) => {
-  itens.forEach((char) => {
-    const element = `
-      <div class="card">
-        <div class="image-wrapper">
-          <img
-            src="${char.image}"
-            alt="image"
-          />
-        </div>
-        <div class="info-wrapper">
-          <h2>${char.name}</h2>
-          <div class="gender-wrapper">
-            <span class="material-icons ${char.gender.toLowerCase()}">${
-      char.gender === "Male" ? "male" : "female"
-    }</span>
-            <p>${char.species}</p>
-          </div>
-          <div class="status-wrapper">
-            <span class="material-icons ${char.status.toLowerCase()}">circle</span>
-            <p>${char.status}</p>
-          </div>
-          <div class="location-wrapper">
-            <span class="material-icons">public</span>
-            <p>${char.location}</p>
-          </div>
-          <p>Displayed ${char.episode.length} times</p>
-        </div>
-      </div>
-    `;
-
-    cardsWrapper.innerHTML += element;
-  });
-};
-
-const renderOptionsFilterLocation = (itens) => {
-  itens.forEach((location) => {
-    const option = `
-      <option value="${location.id}">${location.name}</option>
-    `;
-
-    selectLocationsSelect.innerHTML += option;
-  });
-};
 
 nameCharacterFilter.addEventListener("input", (e) => {
   e.preventDefault();
