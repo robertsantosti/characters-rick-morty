@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pesonagens do Rick & Morty</title>
 
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body id="app-root">
@@ -16,28 +20,24 @@
     </header>
 
     <main id="app-main">
-      <div class="filter-wrapper"></div>
-
-      <div class="cards-wrapper">
-        <div class="card">
-          <div class="image-wrapper">
-            <img
-              src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-              alt="image"
-            />
-          </div>
-          <div class="info-wrapper">
-            <h2>Rick Sanchez</h2>
-            <p>Human - Male (icon)</p>
-            <div class="status-wrapper">
-              (icone)
-              <p>Alive</p>
-            </div>
-            <p>(icone) Earth</p>
-            <p>Displayed X times</p>
-          </div>
+      <div class="filter-wrapper">
+        <div class="form-group">
+          <label for="nameCharacterInput">Nome do personagem</label>
+          <input
+            type="text"
+            id="nameCharacterInput"
+            placeholder="Digite o nome do personagem"
+          />
+        </div>
+        <div class="form-group">
+          <label for="locationsSelect">Local</label>
+          <select id="locationsSelect">
+            <option value="">Selecione</option>
+          </select>
         </div>
       </div>
+
+      <div id="cards-wrapper"></div>
     </main>
 
     <footer id="app-footer">
